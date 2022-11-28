@@ -19,7 +19,7 @@ runs:
 
     - name: Get Pyodide download link
       id: get-download-link
-      if: steps.cache-pyodide.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-pyodide.outputs.cache-hit != 'true' }}
       shell: bash
       run: |
         PYODIDE_MAJOR=$(echo "${{ inputs.version }}" | cut -d. -f1)
@@ -37,7 +37,7 @@ runs:
 
     - name: Download Pyodide
       shell: bash
-      if: steps.cache-pyodide.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-pyodide.outputs.cache-hit != 'true' }}
       run: |
         wget -q ${{ steps.get-download-link.outputs.url }} -O pyodide.tar.bz2
         tar xjf pyodide.tar.bz2
