@@ -7,6 +7,10 @@ inputs:
   to:
     required: true
     type: string
+outputs:
+  cache-hit:
+    description: "Cache hit status"
+    value: ${{ steps.cache-pyodide.outputs.cache-hit }}
 runs:
   using: "composite"
   steps:

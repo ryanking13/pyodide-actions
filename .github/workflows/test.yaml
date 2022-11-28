@@ -81,6 +81,7 @@ jobs:
         with:
           python-version: "3.10"
       - uses: ./download-pyodide
+        id: download-pyodide
         with:
           version: ${{ matrix.version }}
           to: pyodide
@@ -91,6 +92,8 @@ jobs:
           grep -q "pyodide.js" result.log
           grep -q "pyodide.asm.js" result.log
           grep -q "pyodide.asm.wasm" result.log
+
+          echo cache-hit: ${{ steps.download-pyodide.outputs.cache-hit }}
   lint:
     runs-on: ubuntu-latest
     steps:
